@@ -1,0 +1,15 @@
+C:\Users\xra\source\repos\Игра\Игра\bin\Debug\Игра.exe.config
+C:\Users\xra\source\repos\Игра\Игра\bin\Debug\Игра.exe
+C:\Users\xra\source\repos\Игра\Игра\bin\Debug\Игра.pdb
+C:\Users\xra\source\repos\Игра\Игра\obj\Debug\Игра.csproj.AssemblyReference.cache
+C:\Users\xra\source\repos\Игра\Игра\obj\Debug\Игра.csproj.SuggestedBindingRedirects.cache
+C:\Users\xra\source\repos\Игра\Игра\obj\Debug\Игра.csproj.CoreCompileInputs.cache
+C:\Users\xra\source\repos\Игра\Игра\obj\Debug\Игра.exe
+C:\Users\xra\source\repos\Игра\Игра\obj\Debug\Игра.pdb
+A:\Downloads\Игра\Игра\Игра\bin\Debug\Игра.exe.config
+A:\Downloads\Игра\Игра\Игра\bin\Debug\Игра.exe
+A:\Downloads\Игра\Игра\Игра\bin\Debug\Игра.pdb
+A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.csproj.AssemblyReference.cache
+A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.csproj.CoreCompileInputs.cache
+A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.exe
+A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.pdb
