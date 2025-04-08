@@ -43,15 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CorrectWord.cs" />
-    <Compile Include="Food.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="Persons.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Game\Shop.cs" />
+    <Compile Include="Other\CorrectWord.cs" />
+    <Compile Include="Objects\Enemy.cs" />
+    <Compile Include="Objects\Food.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="Objects\Objects.cs" />
+    <Compile Include="Objects\Player.cs" />
+    <Compile Include="Game\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Other\App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
