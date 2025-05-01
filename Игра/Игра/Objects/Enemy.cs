@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 
 namespace Игра
 {
@@ -6,43 +9,50 @@ namespace Игра
     {
         private int Damage { get; set; }
         //private int Money { get; set; } // Оставим на будещее
-        Random random = new Random();
 
         public Enemy(int x, int y, int health, int maxHealth, int damage, string image)
         {
-            X = x;
-            Y = y;
-            Health = health;
-            MaxHealth = maxHealth;
+            GetX = x;
+            GetY = y;
+            GetHealth = health;
+            GetMaxHealth = maxHealth;
             Damage = damage;
-            Image = image;
+            GetImage = Image.FromFile(GamePath.EnemyImage);
         }
 
-        public void DrawEnemy()
+        public int GetDamage
         {
-            Console.SetCursorPosition(Y, X);
-            Console.Write(Image);
+            get { return Damage; }
+            set { Damage = value; }
         }
 
-        public void ControlEnemy(char[,] map)
+        public static void ControlEnemy(char[,] map, List<Enemy> enemies)
         {
-            int newX = X;
-            int newY = Y;
-            // 0 - вверх, 1 - вниз, 2 - влево, 3 - вправо
-            switch (random.Next(0, 4))
-            {
-                case 0: newX--; break;
-                case 1: newX++; break;
-                case 2: newY--; break;
-                case 3: newY++; break;
-            }
+            Random random = new Random();
 
-            if (map[newX, newY] == ' ')
-            {
-                map[X, Y] = ' ';
-                X = newX;
-                Y = newY;
-                map[X, Y] = Image.ToCharArray()[0];
+            foreach (var enemy in enemies)
+            {   
+                // Случайное направление: 0 - вверх, 1 - вниз, 2 - влево, 3 - вправо
+
+                int newX = enemy.GetX;
+                int newY = enemy.GetY;
+
+                switch (random.Next(4))
+                {
+                    case 0: newX--; break; // Вверх
+                    case 1: newX++; break; // Вниз
+                    case 2: newY--; break; // Влево
+                    case 3: newY++; break; // Вправо
+                }
+
+                // Проверяем, можно ли переместиться
+                if (newX >= 0 && newX < map.GetLength(0) && newY >= 0 && newY < map.GetLength(1) && map[newX, newY] == ' ')
+                {
+                    map[enemy.GetX, enemy.GetY] = ' '; // Очищаем старую позицию врага
+                    map[newX, newY] = 'E'; // Перемещаем врага
+                    enemy.GetX = newX;
+                    enemy.GetY = newY;
+                }
             }
         }
     }

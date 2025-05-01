@@ -1,34 +1,47 @@
-﻿using System;
+﻿using System.Drawing;
 
 namespace Игра
 {
     class Object
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public string Image { get; set; }
-    }
+        private int X { get; set; }
+        private int Y { get; set; }
+        private Image Image { get; set; }
 
-    class Cursor : Object
-    {
-        public int Choice = 0;
-
-        public Cursor(int x, int y, string image)
+        public int GetX
         {
-            X = x;
-            Y = y;
-            Image = image;
+            get { return X; }
+            set { X = value; }
         }
-        public void DrawCursor()
+
+        public int GetY
         {
-            Console.SetCursorPosition(X, Y);
-            Console.Write(Image);
+            get { return Y; }
+            set { Y = value; }
+        }
+
+        public Image GetImage
+        {
+            get { return Image; }
+            set { Image = value; }
         }
     }
 
     class Person : Object
     {
-        public int Health { get; set; }
-        public int MaxHealth { get; set; }
+        private int Health { get; set; }
+        private int MaxHealth { get; set; }
+
+        public int GetHealth
+        {
+            get { return Health; }
+            set { Health = value; }
+        }
+
+        public int GetMaxHealth
+        {
+            get { return MaxHealth; }
+            set { MaxHealth = value; }
+        }
     }
 }

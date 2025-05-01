@@ -13,3 +13,6 @@ A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.csproj.AssemblyRefere
 A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.csproj.CoreCompileInputs.cache
 A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.exe
 A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.pdb
+A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.GameForm.resources
+A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.Properties.Resources.resources
+A:\Downloads\Игра\Игра\Игра\obj\Debug\Игра.csproj.GenerateResource.cache

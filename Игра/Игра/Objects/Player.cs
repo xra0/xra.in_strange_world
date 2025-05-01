@@ -1,84 +1,96 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using Игра.Objects.Images;
 
 namespace Игра
 {
     class Player : Person
     {
-        public int Yummy, Money;
-        public string donutsText;
-        public string moneyText;
+        private int Yummy, Money;
+        private static int best = Convert.ToInt32(File.ReadAllText(GamePath.BestScoreFile));
 
-        public Player(int x, int y, int health, int maxHealth, string image)
+        public Player(int x, int y, int health, int maxHealth)
         {
-            X = x;
-            Y = y;
-            Health = health;
-            MaxHealth = maxHealth;
-            Image = image;
+            GetX = x;
+            GetY = y;
+            GetHealth = health;
+            GetMaxHealth = maxHealth;
+            GetImage = Images.PlayerImage;
         }
 
-        public void DrawHealthBar()
+        public int GetYummy
         {
-            string healthbar = "";
-
-            ConsoleColor defaultColor = Console.BackgroundColor;
-
-            for (int i = 0; i < Health; i++)
-                healthbar += " ";
-
-            Console.SetCursorPosition(0, 36);
-            Console.Write('|');
-            Console.BackgroundColor = ConsoleColor.Green;
-            Console.Write(healthbar);
-            Console.BackgroundColor = defaultColor;
-
-            healthbar = "";
-            for (int i = Health; i < MaxHealth; i++)
-                healthbar += " ";
-            Console.Write(healthbar + "|");
+            get { return Yummy; }
+            set { Yummy = value; }
         }
 
-        public void DrawPlayer()
+        public int GetMoney
         {
-            Console.SetCursorPosition(Y, X);
-            Console.Write(Image);
+            get { return Money; }
+            set { Money = value; }
         }
 
-        public void DrawInventory()
+        public void ControlPlayer(char[,] map, KeyEventArgs e)
         {
-            Console.SetCursorPosition(0, 30);
-            Console.WriteLine($"\nЗадача: Перед тобой поле. Нужно собрать все вкусняшки(*)!\nИнвентарь: \n{Yummy} {donutsText}," +
-                    $"\nДеньги: {Money} {moneyText}\nЗдоровье:");
-        }
-
-        public void ControlPlayer(char[,] map)
-        {
-            switch (Console.ReadKey().Key)
+            switch (e.KeyCode)
             {
-                case ConsoleKey.UpArrow:
-                    if (map[X - 1, Y] != '■') X--; break;
-                case ConsoleKey.DownArrow:
-                    if (map[X + 1, Y] != '■') X++; break;
-                case ConsoleKey.LeftArrow:
-                    if (map[X, Y - 1] != '■') Y--; break;
-                case ConsoleKey.RightArrow:
-                    if (map[X, Y + 1] != '■') Y++; break;
+                case Keys.Up:
+                    if (map[GetX - 1, GetY] != '■') GetX--;
+                    break;
+                case Keys.Down:
+                    if (map[GetX + 1, GetY] != '■') GetX++;
+                    break;
+                case Keys.Left:
+                    if (map[GetX, GetY - 1] != '■') GetY--;
+                    break;
+                case Keys.Right:
+                    if (map[GetX, GetY + 1] != '■') GetY++;
+                    break;
             }
         }
 
-        public void Extra(Player player, char[,] map)
+        public void Interaction(char[,] map, bool isShopOpen, Panel shopPanel)
         {
-            if (map[player.X, player.Y] != ' ')
+            switch (map[GetX, GetY])
             {
-                switch (map[X, Y])
-                {
-                    case '*': Yummy++; break;
-                    case 'E':
-                    case 'K': Health--; break;
-                    case '$': Money += 100; break;
-                    case '&': Shop.Show(player, moneyText); break;
-                }
-                if (map[player.X, player.Y] != '&') map[X, Y] = ' ';
+                case '*':
+                    Yummy++;
+                    break;
+                case 'E':
+                case 'K':
+                    GetHealth--;
+                    break;
+                case '$':
+                    Money += 100;
+                    break;
+                case '&':
+                    if (!isShopOpen) // Проверяем, открыт ли магазин
+                    {
+                        isShopOpen = true; // Устанавливаем флаг
+                        shopPanel.Visible = true;
+                        shopPanel.BringToFront(); // Перемещаем панель на передний план
+                    }
+                    return; // Прекращаем дальнейшую обработку
+            }
+            if (map[GetX, GetY] != '&' && map[GetX, GetY] != 'E')
+            {
+                map[GetX, GetY] = ' '; // Убираем объект с карты
+            }
+        }
+
+        public int BestScore
+        {
+            get
+            {
+                return best;
+            }
+            set
+            {
+                File.WriteAllText(GamePath.BestScoreFile,
+                $"{((GetMoney + GetYummy > best) ? GetMoney + GetYummy : best)}");
+
             }
         }
     }
